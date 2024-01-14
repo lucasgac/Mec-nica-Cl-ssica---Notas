@@ -1,0 +1,88 @@
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{babel,arrows,positioning,chains,matrix,scopes,cd,quotes,calc,decorations.pathmorphing}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{algorithmic}
+\usepackage[portuguese, ruled, lined]{algorithm2e}
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+
+%quiver
+\tikzset{curve/.style={settings={#1},to path={(\tikztostart)
+    .. controls ($(\tikztostart)!\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+    and ($(\tikztostart)!1-\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+    .. (\tikztotarget)\tikztonodes}},
+    settings/.code={\tikzset{quiver/.cd,#1}
+        \def\pv##1{\pgfkeysvalueof{/tikz/quiver/##1}}},
+    quiver/.cd,pos/.initial=0.35,height/.initial=0}
+
+% TikZ arrowhead/tail styles.
+\tikzset{tail reversed/.code={\pgfsetarrowsstart{tikzcd to}}}
+\tikzset{2tail/.code={\pgfsetarrowsstart{Implies[reversed]}}}
+\tikzset{2tail reversed/.code={\pgfsetarrowsstart{Implies}}}
+% TikZ arrow styles.
+\tikzset{no body/.style={/tikz/dash pattern=on 0 off 1mm}}
+
+\newtheorem{definition}{Definição}[section]
+\newtheorem{proposition}[definition]{Proposição}
+\newtheorem{lemma}[definition]{Lema}
+\newtheorem{axiom}[definition]{Axioma}
+\newtheorem{corollary}[definition]{Corolário}
+\newtheorem{theorem}[definition]{Teorema}
+\newtheorem{distribution}[definition]{Distribuição}
+\newtheorem{example}[definition]{Exemplo}
+
+\newcommand{\highlight}[1]{{\color{red3} #1}}
+
+\DeclareMathOperator{\freeab}{Free_{Ab}}
+\DeclareMathOperator{\Top}{Top}
+\DeclareMathOperator{\Ab}{Ab}
+\DeclareMathOperator{\Grp}{Grp}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\module}{Mod}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\chain}{Ch}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Alt}{Alt}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Exp}{Exp}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Ricci}{Ricci}
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\gyr}{gyr}
+\DeclareMathOperator{\ath}{arctanh}
+\DeclareMathOperator{\Prob}{Prob}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\On}{O}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\Un}{U}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Graf}{Graf}
+\DeclareMathOperator{\Real}{Re}
+\DeclareMathOperator{\Imag}{Im}
+\DeclareMathOperator{\Bij}{Bij}
+
+\newcommand{\Mod}[1]{$\module_{#1}$}
+\newcommand{\Chain}[1]{$\chain(#1)$}
+
+\newcommand{\openset}[0]{{\phantom{}\subset}{\circ}\phantom{.}}
+
+\def\arrvline{\hfil\kern\arraycolsep\vline\kern-\arraycolsep\hfilneg}

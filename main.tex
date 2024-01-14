@@ -1,0 +1,210 @@
+\documentclass[a4paper,12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath,amsthm,amssymb,amsfonts,enumitem}
+
+% \usepackage{draftwatermark}
+% \SetWatermarkText{DRAFT}
+% \SetWatermarkScale{1}
+
+%%%%%%%%%%%%%FONT - UNCOMMENT%%%%%%%%%%
+
+\usepackage[sfdefault,light,medium]{josefin}
+\usepackage[T1]{fontenc}
+
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\dotu}{\mathop{\dot{\cup}}}
+\newcommand{\quotes}[1]{"#1"{}}
+\newcommand{\st}{\phantom{.}\bigg|\phantom{.}}
+
+\renewcommand{\phi}{\varphi}
+
+%\usepackage{imakeidx} %%%%%%index
+%\makeindex[intoc]
+
+%\usepackage[backend=biber,sorting=nty,style=numeric]{biblatex} %%%%%%%%%bibliography
+%\addbibresource{bibliography.bib}
+%\DeclareNameAlias{default}{family-given}
+
+\input{themosaic.tex}
+\input{mathoperators.tex}
+
+\usepackage{listings}
+
+\lstset{
+    language=html, %% Troque para PHP, C, Java, etc... bash é o padrão
+    basicstyle=\ttfamily\small,
+    numberstyle=\footnotesize,
+    numbers=left,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    tabsize=2,
+    rulecolor=\color{black!30},
+    title=\lstname,
+    escapeinside={\%*}{*)},
+    breaklines=true,
+    breakatwhitespace=true,
+    framextopmargin=2pt,
+    framexbottommargin=2pt,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={í}{{\'i}}1 {á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1,
+}
+
+\begin{document}
+\cover{Mecânica Clássica}{\scriptsize Notas em Física Matemática}{Lucas Giraldi A. Coimbra}
+\clearpage
+\thispagestyle{empty}
+
+\clearpage
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+\begingroup
+  \pagestyle{empty}%
+  \cleardoublepage
+\endgroup
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\setcounter{chapter}{-1}
+
+\chapter{Prelúdio}
+
+O livro a seguir é uma releitura do livro ``Mathematical Methods of Classical Mechanics'' de V. I. Arnold. As notas aqui contidas possuem, em sua completude, todo o conteúdo do livro citado. Adicionalmente, as coisas aqui estarão formuladas de maneira um pouco mais agradável ao leitor que não está acostumado com a linguagem avançada da matemática e da geometria. Além disso, prezo por manter aqui algumas seções adicionais, que contém alguns pré-requisitos para compreender completamente as teorias clássicas da mecânica de corpos.
+
+Para prosseguir com a leitura, é do interesse do leitor que este tenha certa familiaridade com análise de espaços euclidianos, assim como álgebra linear e algum conhecimento de variedades diferenciáveis. Tópicos adicionais de matemática, que não costumam ser ensindados ao longo de um curso de graduação, serão explicados conforme o necessário.
+
+\part{Mecânica Newtoniana}
+
+\chapter{Fatos Experimentais}
+
+\section{Princípios}
+
+O principal objeto para estudarmos mecânica clássica do ponto de vista newtoniano são os espaços afins. Intuitivamente, gostamos de pensar em espaços afins como espaços vetoriais sem uma origem fixada, ou seja, podemos atribuir a qualquer ponto desse espaço a função de origem, e assim surgiram operações, que dependem desse ponto, e que darão ao espaço uma estrutura linear. É interessante comentar que espaços afins não são, de maneira alguma, como os antigos físicos pensavam na teoria clássica. Podemos, por exemplo, lembrar que o modelo geocêntrico do universo foi considerado correto por muitos anos, e que nesse caso, a Terra seria a origem fixada do espaço linear.
+
+\begin{defi}{Espaço Afim}{espaco_afim}
+  Uma estrutura de \highlight{espaço afim} em um conjunto $A$, é a atribuição, para $A$, de um espaço vetorial $V$ e um mapa \begin{equation}
+    \begin{split}
+      \Theta \colon A \times A &\to V \\ (x,y) &\mapsto \overrightarrow{xy}
+    \end{split}.
+  \end{equation} Pedimos que esse mapa satisfaça duas propriedades:
+  \begin{itemize}
+    \item para cada $x \in A$, o mapa parcial $\Theta_x \colon y \mapsto \overrightarrow{xy}$ é uma bijeção;
+    \item para todos $x,y,z \in A$, vale a \highlight{relação de Chasles}: $\overrightarrow{xy} + \overrightarrow{yz} = \overrightarrow{xz}$.
+  \end{itemize}
+
+  Nesse caso, dizemos que o espaço afim $A$ é \highlight{direcionado} por $V$. Fixado $x \in A$, podemos dar para $A$ uma estrutura linear da seguinte forma: se $y, z \in A$ e $\lambda \in \mathbb{R}$, definimos $y + z = \Theta_x^{-1}(\overrightarrow{xy} + \overrightarrow{xz})$ e $\lambda y = \Theta_x^{-1}(\lambda \overrightarrow{xy})$. Note que, nesse caso, $x$ age como a origem de $A$, pois $$x + y = \Theta_x^{-1}(\overrightarrow{xx} + \overrightarrow{xy}) = \Theta_x^{-1}(\overrightarrow{xy}) = y.$$
+\end{defi}
+
+\begin{exam}{Espaço Afim}{espaco_afim}
+  Todo espaço vetorial é afim e direcionado por si mesmo, basta tomar o mapa $\Theta(x,y) = y - x$. Além disso, o produto de dois espaços afins é também um espaço afim, direcionado pelo produto dos espaços vetoriais originais.
+\end{exam}
+
+O primeiro princípio experimental que vamos utilizar para a construção da teoria é o princípio do espaço-tempo.
+
+\begin{ax}{do Espaço-Tempo}{espaco_tempo}
+  O espaço é tridimensional e euclidiano, e o tempo é unidimensional.
+\end{ax}
+
+O que isso diz, matematicamente falando, é que os espaços afins que vamos utilizar para modelar fenômenos mecânicos (durante o estudo da mecânica newtoniana), serão sempre direcionados por $\mathbb{R} \times \mathbb{R}^3$, com coordenadas $(t, x, y, z)$, em que a primeira representa o tempo e as outras três representam o espaço. Dizer que o espaço é euclidiano significa que, dados $x, y \in A$ simultâneos, ou seja, cuja coordenada temporal é idêntica, se denotamos $\overrightarrow{xy}$ por $y - x$, temos uma função $$\rho(x,y) = \sqrt{(y - x, y - x)}$$ que mede a distância entre as coordenadas espaciais de $x$ e $y$. Todas essas observações se resumem na definição do que é uma estrutura galileana.
+
+\begin{defi}{Estrutura Galileana}{estrutura_galileana}
+  O \highlight{espaço-tempo galileano} consiste de três elementos:
+  \begin{itemize}
+    \item um espaço afim $A^4$ direcionado por $\mathbb{R} \times \mathbb{R}^3$, cujos elementos são chamados de \highlight{pontos do mundo} ou \highlight{eventos}.
+    
+    \item um mapa \highlight{tempo}, que geralmente é considerado como a projeção linear \begin{equation}
+      \begin{split}
+        t \colon \mathbb{R} \times \mathbb{R}^3 &\to \mathbb{R} \\ (t,x,y,z) &\mapsto t
+      \end{split}.
+    \end{equation} O \highlight{intervalo de tempo} entre dois eventos $x, y \in A^4$ é o número $t(y - x)$. Se $t(y - x) = 0$, dizemos que $x$ e $y$ são \highlight{simultâneos}.
+
+    \item dados dois eventos $x, y \in A^4$ simultâneos, a \highlight{distância} entre eles, dada por $$\rho(x,y) = ||y - x|| = \sqrt{(y - x, y - x)}.$$
+  \end{itemize}
+
+  Um espaço afim equipado com uma estrutura galileana é dito um \highlight{espaço galileano}. Note que $\mathbb{R} \times \mathbb{R}^3$ age em qualquer espaço galileano $A^4$ através de \highlight{deslocamentos paralelos}: dado $u \in \mathbb{R} \times \mathbb{R}^3$, dado $x \in A$ podemos tomar $u = y - x$ para algum $y \in A$, e assim definimos a ação pela direita por $x + u = y$. Nesse sentido, costumamos chamar $\mathbb{R} \times \mathbb{R}^3$ de \highlight{grupo dos deslocamentos paralelos}.
+\end{defi}
+
+Podemos agora continuar com o segundo fato experimental:
+
+\begin{ax}{da Relatividade de Galileo}{relatividade_galileo}
+  Existe um sistema de coordenadas inercial, todas as leis da natureza são as mesmas em todos os sistemas inerciais, e todos os sistemas que se relacionam, por movimentos retilíneos uniformes, com um sistema inercial, são também inerciais.
+\end{ax}
+
+Precisamos agora entender o que cada um dos termos no princípio acima significa. Primeiro, vamos falar de referenciais e sistemas de coordenadas. Matematicamente falando, escolher um referencial ou, sinonimamente, um sistema de coordenadas, é escolher uma reta no nosso espaço afim. Mas... o que é uma reta?
+
+\begin{defi}{Subespaço Afim}{subespaco_afim}
+  Dado um espaço afim $A$ direcionado por $V$, um subconjunto $F \subset A$ é um \highlight{subespaço afim} de $A$ se existe $x \in F$ tal que $\Theta_x(F)$ é um subespaço vetorial de $V$. Se $\dim \Theta_x(F) = 1$, diremos que $F$ é uma \highlight{reta} em $A$.
+\end{defi}
+
+Agora vamos entender exatamento o porquê de referenciais e retas serem sinônimos. Quando falamos na palavra ``referencial'', pensamos em determinar um objeto que sirva de referência para fazer medições. Posição e velocidade são atributos de objetos que não podem ser medidos absolutamente, isso é, precisam de algum objeto que possua velocidade e posição, com o qual podemos comparar.
+
+Por exemplo: imagine que você está em um trem, ao lado de outro trem. Imagine que ambos os trens estão se movendo. Se você olha pela janela e tudo que você consegue ver é o outro trem, mesmo que você veja as janelas indo do trem ficando pra trás, você não sabe se você está andando e o outro está parado, ou se ambos estão andandos e o seu está mais rápido, ou até se o seu está andando e o outro está dando ré. Tudo que você pode dizer é que, com relação ao SEU trem, o outro possui velocidade negativa.
+
+A aceleração, porém, é outra história. Na mesma situação anterior, você pode até não saber como funciona a velocidade dos trens com relação à terra, mas a partir do momento que algum dos trens freia, você sabe exatamente tudo o que aconteceu: \begin{itemize}
+  \item Se de repente o trem que está passando na sua janela começar a ir pra trás mais devagar, mas você não sentir força nenhuma, tenha certeza que ele está dando ré mais rápido, ou seja, uma aceleração negativa;
+  \item Por outro lado, se você sente uma força sendo aplicada em você, significa que o seu trem acelerou, e com os instrumentos certos, essa aceleração poderia ser medida independente de qualquer referencial.
+\end{itemize}
+
+Por esses motivos, quando buscamos por um ``referencial'' no estudo de mecânica clássica, estamos buscando por um ponto, ou seja, uma posição, e por uma velocidade, ou seja, um vetor tangente àquele ponto. Porém, precisamos lembrar que estamos no espaço quadri-dimensional, isso é, o tempo evolui, e portanto uma particula com velocidade se move, e cria assim uma curva.
+
+\begin{defi}{Curvas}{topologia_curvas}
+  Em $A^4$ podemos colocar a topologia dada pelas bases de vizinhanças $$\Theta_x(B(0, \varepsilon)), \quad x \in A^4 \text{ e } \varepsilon \in \mathbb{R}.$$ Além disso, damos para $A^4$ uma estrutura diferenciável, que é dada pelas cartas $(\Theta_x, A^4)$ em cada $x \in A^4$. Uma \highlight{curva} em $A^4$ é uma aplicação diferenciável $\gamma \colon I \to A^4$ onde $I$ é um intervalo da reta real.
+\end{defi}
+
+A aceleração, por outro lado, é uma grandeza absoluta, no sentido de que independente do referencial, sempre podemos determinar unicamente a aceleração de um objeto. Por esse motivo, referenciais não precisam ter uma aceleração. Isso, claro, não impede que eles a tenham, e portanto damos um nome especial para referenciais não acelerados.
+
+\begin{defi}{Referencial inercial}{referencial_inercial}
+  Um \highlight{referencial inercial} é um referencial não acelerado.
+\end{defi}
+
+Ora ora, se um referencial inercial é uma curva que não tem aceleração, ou seja, cujo campo velocidade é constante, então referenciais inerciais são geodésicas! Mais especificamente, no nosso caso, referenciais inerciais são retas.
+
+\begin{prop}{Parametrização de Retas}{parametrizacao_retas}
+  Toda reta é uma geodésica, e toda geodésica é uma reta.
+\end{prop}
+\begin{proof}
+  Dada $R \subset A^4$ uma reta direcionada por $F \subset \mathbb{R} \times \mathbb{R}^3$, tome $x, y \in R$ e defina \begin{equation*}
+    \begin{split}
+      \gamma \colon \mathbb{R} &\to A^4 \\ t &\mapsto \Theta_x^{-1}(t\overrightarrow{xy})
+    \end{split}.
+  \end{equation*}
+  Esse mapa é diferenciável, afinal, $\Theta_x$ é uma carta que cobre $A^4$ e temos \begin{equation*}
+    (\Theta_x \circ \gamma)(t) = \Theta_x(\Theta_x^{-1}(t\overrightarrow{xy})) = t\overrightarrow{xy},
+  \end{equation*} que é claramente suave pois é polinomial em cada coordenada. Além disso, temos \begin{equation*}
+    \Theta_x \circ \gamma(t) = t\overrightarrow{xy} \implies \gamma'(t) = \overrightarrow{xy}.
+  \end{equation*} Dessa maneira, segue que $D_t\gamma' \equiv 0$ e portanto $\gamma$ é uma geodésica. Mais ainda, $\gamma$ é uma parametrização para $R$, pois $\overrightarrow{xy} \in F$ e portanto $t\overrightarrow{xy} \in F$ para todo $t$, da onde segue que $\gamma(t) \in R$ para todo $t$. Além disso, o mapa é uma bijeção, pois \begin{equation*}
+    \gamma(t) = \gamma(s) \implies \Theta_x^{-1}(t\overrightarrow{xy}) = \Theta_x^{-1}(s\overrightarrow{xy}) \implies t\overrightarrow{xy} = s\overrightarrow{xy} \implies t = s
+  \end{equation*} e, se $z \in R$, então $\overrightarrow{xz} \in F$, da onde segue que $\overrightarrow{xz} = t\overrightarrow{xy}$ para algum $t$ e assim $z = \Theta_x^{-1}(t\overrightarrow{xy})$.
+
+  O próximo passo é mostrar que toda geodésica é uma reta.  Bom, isso é simples, afinal, se $\gamma'(t) = v \in \mathbb{R} \times \mathbb{R}^3$ para todo $t$, então necessariamente $(\Theta_{\gamma(0)} \circ \gamma)(t) = tv + w$ para algum $w \in \mathbb{R} \times \mathbb{R}^3$. Agora, note que \begin{equation*}
+    w = (\Theta_{\gamma(0)} \circ \gamma)(0) = \Theta_{\gamma(0)}(\gamma(0)) = 0,
+  \end{equation*} da onde segue que, tomando $x = \gamma(0)$, temos $\gamma(t) = \Theta^{-1}_x(tv)$, que é precisamente uma reta.
+\end{proof}
+
+O próximo passo é entender como referenciais e sistemas de coordenadas se relacionam. Sistemas de coordenadas servem, principalmente, para medir posição de objetos. Dito isso, a ideia é que fixada uma reta parametrizada por $\gamma = \gamma(t)$, para cada $t$ podemos utilizar 
+$\gamma(t)$ para vetorializar o espaço $A^4$ com o processo descrito na definição de espaço afim, e fixada uma base para esse espaço vetorial, temos agora coordenadas para nosso espaço afim.
+
+Antes de continuarmos, temos ainda que falar sobre a última parte do princípio da relatividade: ``todos os sistemas que se relaciona, por movimentos retilíneos uniformes, com um sistema inercial, são também inerciais''. O que isso significa?
+
+\chapter{Investigando as Equações do Movimento}
+
+\part{Mecânica Lagrangeana}
+\part{Mecânica Hamiltoniana}
+
+\nocite{*}
+\clearpage
+\thispagestyle{empty}
+
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay, x = 1cm, y = 1cm]
+    \node at ([xshift = 0.5 \paperwidth, yshift = 0.5 \paperheight] current page.south west) {\includegraphics[width=\paperwidth]{themosaic.png}};
+\end{tikzpicture}
+\vspace{0.5\paperheight}
+\clearpage
+\thispagestyle{empty}
+
+\end{document}

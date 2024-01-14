@@ -1,0 +1,151 @@
+\usepackage{tikz,graphicx,pgf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepackage{xcolor}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{theorems,skins}
+\usepackage[]{parskip}
+
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+\definecolor{red1}{HTML}{592D23}
+\definecolor{red2}{HTML}{DFA79A}
+\definecolor{red3}{HTML}{DA6E56}
+\definecolor{red4}{HTML}{59433E}
+\definecolor{red5}{HTML}{A65341}
+
+\renewcommand{\qedsymbol}{\begin{tikzpicture}[scale=0.7]
+\begin{scope}
+\draw[color=red4,fill=red4,x=1pt,y=1pt,xshift=-12pt] (\linewidth,0)--++(6,0)--++(-6,6)--cycle;
+\draw[color=red3,fill=red3,x=1pt,y=1pt] (\linewidth,0)--++(-6,0)--++(6,6)--cycle;
+\draw[color=red1,fill=red1,x=1pt,y=1pt,yshift=6pt] (\linewidth,0)--++(-6,6)--++(6,0)--cycle;
+\draw[color=red5,fill=red5,x=1pt,y=1pt,xshift=-6pt] (\linewidth,12)--++(-6,0)--++(0,-6)--cycle;
+\draw[color=red2,fill=red2,x=1pt,y=1pt,xshift=-12pt] (\linewidth,6)--++(6,-6)--++(6,6)--++(-6,6)--cycle;
+\end{scope}
+\end{tikzpicture}}
+
+\newtcbtheorem[number within=part]{theo}{\vphantom{p}Teorema}{enhanced,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;
+},interior engine=empty,
+},frame hidden,interior hidden,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);
+\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.south west)--++(\linewidth,0);}}{theo}
+
+\newtcbtheorem[use counter from=theo]{exam}{\vphantom{p}Exemplo}{breakable, enhanced,width=\paperwidth-4cm,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;},interior engine=empty},frame hidden,sharp corners,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);}}{exam}
+
+\newtcbtheorem[use counter from=theo]{defi}{\vphantom{p}Definição}{enhanced,width=\paperwidth-4cm,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;},interior engine=empty},frame hidden,sharp corners,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);}}{defi}
+
+\newtcbtheorem[use counter from=theo]{prop}{\vphantom{p}Proposição}{enhanced,width=\paperwidth-4cm,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;},interior engine=empty},frame hidden,interior hidden,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);
+\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.south west)--++(\linewidth,0);}}{prop}
+
+\newtcbtheorem[use counter from=theo]{lem}{\vphantom{p}Lema}{enhanced,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;},interior engine=empty,
+},frame hidden,interior hidden,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);
+\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.south west)--++(\linewidth,0);}}{lem}
+
+\newtcbtheorem[use counter from=theo]{cor}{\vphantom{p}Corolário}{enhanced,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;},interior engine=empty,
+},frame hidden,interior hidden,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);
+\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.south west)--++(\linewidth,0);}}{cor}
+
+\newtcbtheorem[use counter from=theo]{rem}{\vphantom{p}Observação}{enhanced,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;
+},interior engine=empty},frame hidden,sharp corners,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);}}{rem}
+
+\newtcbtheorem[]{ax}{\vphantom{p}Princípio}{enhanced,coltitle=black,fonttitle=\sffamily\bfseries,attach boxed title to top left={xshift=-2mm,yshift=-1.5mm},boxed title style={frame code={
+\path[fill=red3,x=1pt,y=1pt] ([xshift=5pt,yshift=-2pt]interior.north west)--++(0,-12)--++(-6,0)--cycle;
+\path[fill=red2,x=1pt,y=1pt] ([xshift=-1pt,yshift=-14pt]interior.north west)--++(3,6)--++(-6,2)--cycle;
+\path[fill=red5,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-18,6)--++(9,0)--cycle;
+\path[fill=red1,x=1pt,y=1pt] ([xshift=2pt,yshift=-8pt]interior.north west)--++(-9,6)--++(12,0)--cycle;
+\path[fill=red4,x=1pt,y=1pt] ([xshift=-16pt,yshift=-2pt]interior.north west)--++(15,-12)--++(-2,8)--cycle;
+},interior engine=empty},frame hidden,sharp corners,overlay={\draw[color=red3,dash pattern=on 3pt off 3pt,line width=0.5pt] (interior.north west)--++(\linewidth,0);}}{rem}
+
+\renewenvironment{proof}{\noindent\textbf{Demonstração.}}{\qed}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}
+  {\chaptertitlename\ \thechapter}
+  {20pt}
+  {\begin{tikzpicture}[remember picture,overlay]
+  \draw[color=red3,fill=red3,x=1cm,y=1cm] ([xshift=2cm,yshift=-0.6666cm]current page.north west) --++ (1,-1)--++ (3,1.666)--++(-3,0)--cycle;
+  \draw[color=red2,fill=red2,x=1cm,y=1cm] ([xshift=4cm]current page.north west) --++ (-0.2,-1.8)--++ (4,1.8)--cycle;
+  \draw[color=red1,fill=red1,x=1cm,y=1cm] ([xshift=5cm]current page.north west) --++ (2,-1.7)--++ (2,0)--++(0,1.7)--cycle;
+  \draw[color=red5,fill=red5,x=1cm,y=1cm] ([xshift=6.5cm]current page.north west) --++ (0.6,-2)--++(1,-0.5)--++(3,2.5)--cycle;
+  \draw[color=red2,fill=red2,x=1cm,y=1cm] ([xshift=9cm]current page.north west) --++ (0.3,-2.2)--++(2.3,2.2)--cycle;
+  \draw[color=red4,fill=red4,x=1cm,y=1cm] ([xshift=10cm]current page.north west) --++ (0.7,-1.4)--++(0,-0.5)--++ (2,1.9)--cycle;
+  \draw[color=red3,fill=red3,x=1cm,y=1cm] ([xshift=11.5cm]current page.north west) --++ (0.5,-2)--++ (1.3,0.4)--++(-0.2,1.6)--cycle;
+  \draw[color=red1,fill=red1,x=1cm,y=1cm] ([xshift=13.5cm]current page.north west) --++ (3,-2.3)--++ (2.5,2.3)--cycle;
+  \draw[color=red2,fill=red2,x=1cm,y=1cm] ([xshift=12.5cm]current page.north west) --++ (1.3,-1.8)--++(1.2,-0.5)--++ (-0.25,0.7)--++(0.2,1.6)--cycle;
+  \draw[color=red5,fill=red5,x=1cm,y=1cm] ([xshift=16cm]current page.north west) --++ (2,-2)--++ (1,2)--cycle;
+  \draw[color=red2,fill=red2,x=1cm,y=1cm] ([xshift=17.5cm]current page.north west) --++ (1.7,-2.5)--++ (1,0.1)--++(-0.2,2.4)--cycle;
+  \draw[color=red4,fill=red4,x=1cm,y=1cm] ([xshift=19cm]current page.north west) --([yshift=-2.7cm]current page.north east)--(current page.north east)--cycle;
+  \draw[color=red4,fill=red4,x=1cm,y=1cm] (current page.north west) --++ (0,-2)--++ (3,2)--cycle;
+\end{tikzpicture}}
+
+%%%%%%%%%%%%%%%%%COVER%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cover}[3]{
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay,x=1cm,y=1cm]
+ \node at ([xshift=0.5\paperwidth,yshift=0.5\paperheight]current page.south west) {\includegraphics[width=\paperwidth]{themosaic.png}};
+\end{tikzpicture}
+\vspace{0.5\paperheight}
+\begin{tikzpicture}[remember picture,overlay]
+ \node[xshift=0.1\paperwidth,yshift=0.15\paperheight,anchor=west,scale=3] at (current page.south west) {\parbox{0.8\paperwidth}{{\bf #1}\\[-3pt]
+ {\scriptsize \bf #2}\\[-4pt]
+ {\tiny #3}}};
+\end{tikzpicture}
+}
+
+
+%%%%%%%%%%%LIST-LABELS%%%%%%%%%
+\setlist[itemize,1]{label={\color{red5}$\blacktriangleright$}}
+\setlist[itemize,2]{label={\color{red1}$\blacktriangleright$}}
+\setlist[itemize,3]{label={\color{red3}$\blacktriangleright$}}
+\setlist[itemize,4]{label={\color{red4}$\blacktriangleright$}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linktocpage=true,
+linkcolor=red5,
+citecolor=red5
+}
+\makeatletter
+\newcommand\theHtcb@cnt@theo{\thesection.\arabic{tcb@cnt@theo}}
+\makeatother
